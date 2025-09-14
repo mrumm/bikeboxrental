@@ -13,14 +13,14 @@ export default function HomePage() {
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
               <Typography variant="h1" component="h1" gutterBottom sx={{ fontSize: { xs: '2.5rem', md: '3rem' } }}>
-                Tommy&apos;s Bike Box Rental
+                Bike Box Rental Hamilton
               </Typography>
               <Typography variant="h5" component="p" sx={{ mb: 4, opacity: 0.95 }}>
                 Professional bike travel case rentals in Hamilton, ON
               </Typography>
               <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-                Hi, I&apos;m Tommy Rummel! I&apos;m 5 years old and I&apos;m renting out my family&apos;s professional bike case
-                to help cyclists travel safely with their bikes. Perfect for your next cycling adventure, race, or vacation!
+                Professional bike travel case rentals to help cyclists travel safely with their bikes.
+                Perfect for your next cycling adventure, race, or vacation! Family-owned and operated in Hamilton, ON.
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <Button
@@ -55,7 +55,7 @@ export default function HomePage() {
               <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                 <Image
                   src="/Tommy.jpeg"
-                  alt="Tommy Rummel"
+                  alt="Bike Box Rental Hamilton"
                   width={600}
                   height={450}
                   style={{ width: '100%', height: 'auto', display: 'block' }}

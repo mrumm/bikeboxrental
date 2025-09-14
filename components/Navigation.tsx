@@ -51,7 +51,7 @@ export default function Navigation() {
       }}>
         <Typography variant="h6" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <DirectionsBikeIcon />
-          Tommy&apos;s Bike Box
+          Bike Box Rental Hamilton
         </Typography>
         <IconButton onClick={handleDrawerToggle}>
           <CloseIcon />
@@ -98,7 +98,7 @@ export default function Navigation() {
                   fontWeight: 600,
                 }}
               >
-                Tommy&apos;s Bike Box
+                Bike Box Rental Hamilton
               </Typography>
             </Box>
 

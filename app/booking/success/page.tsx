@@ -66,7 +66,7 @@ function BookingSuccessContent() {
           Booking Confirmed!
         </Typography>
         <Typography variant="h6" color="text.secondary">
-          Thank you for choosing Tommy&apos;s Bike Box Rental
+          Thank you for choosing Bike Box Rental Hamilton
         </Typography>
       </Box>
 

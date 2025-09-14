@@ -77,7 +77,7 @@ export default function FAQPage() {
         Frequently Asked Questions
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
-        Everything you need to know about renting Tommy&apos;s Bike Box
+        Everything you need to know about Bike Box Rental Hamilton
       </Typography>
 
       <Grid container spacing={4}>

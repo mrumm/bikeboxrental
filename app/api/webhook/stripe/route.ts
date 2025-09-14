@@ -98,13 +98,13 @@ async function sendConfirmationEmail(booking: any) {
 
   try {
     await resend.emails.send({
-      from: 'Tommy\'s Bike Box <noreply@bikeboxrental.com>',
+      from: 'Bike Box Rental Hamilton <noreply@bikeboxrentalhamilton.com>',
       to: booking.customerEmail,
-      subject: 'Booking Confirmation - Tommy\'s Bike Box Rental',
+      subject: 'Booking Confirmation - Bike Box Rental Hamilton',
       html: `
         <h2>Booking Confirmed!</h2>
         <p>Dear ${booking.customerName},</p>
-        <p>Thank you for booking Tommy's Bike Box! Your rental has been confirmed.</p>
+        <p>Thank you for booking with Bike Box Rental Hamilton! Your rental has been confirmed.</p>
 
         <h3>Booking Details:</h3>
         <ul>
@@ -118,7 +118,7 @@ async function sendConfirmationEmail(booking: any) {
 
         <p>If you have any questions, please reply to this email.</p>
 
-        <p>Best regards,<br>Tommy & Family</p>
+        <p>Best regards,<br>Bike Box Rental Hamilton</p>
       `,
     });
   } catch (error) {

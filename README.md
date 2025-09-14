@@ -1,4 +1,4 @@
-# Tommy's Bike Box Rental
+# Bike Box Rental Hamilton
 
 Professional bike travel case rental service in Hamilton, ON. Built with Next.js 14, TypeScript, Material UI, Stripe, and Neon Postgres.
 

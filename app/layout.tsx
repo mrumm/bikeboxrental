@@ -6,7 +6,7 @@ import Navigation from '@/components/Navigation';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Tommy's Bike Box Rental - Hamilton, ON",
+  title: "Bike Box Rental Hamilton",
   description: 'Rent a professional bike travel case for your next cycling adventure. B&W International Bike Box II available for weekly rentals in Hamilton, Ontario.',
 };
 
