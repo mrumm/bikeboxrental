@@ -17,7 +17,7 @@ export default function Footer() {
             </Typography>
             <Typography variant="body2" color="text.secondary" paragraph>
               Exact address will be provided 24 hours before your rental.
-              Located in central Hamilton, easily accessible from the QEW and downtown.
+              Located in central Hamilton, easily accessible from the 403 and downtown.
             </Typography>
             <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
               <EmailIcon fontSize="small" />

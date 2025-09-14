@@ -8,65 +8,6 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 export default function HomePage() {
   return (
     <>
-      <Box sx={{ bgcolor: 'primary.main', color: 'white', py: 8 }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h1" component="h1" gutterBottom sx={{ fontSize: { xs: '2.5rem', md: '3rem' } }}>
-                Bike Box Rental Hamilton
-              </Typography>
-              <Typography variant="h5" component="p" sx={{ mb: 4, opacity: 0.95 }}>
-                Professional bike travel case rentals in Hamilton, ON (L8P 2M3)
-              </Typography>
-              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-                Young Tommy Rummel is saving up by renting out our family&apos;s professional B&W bike travel case.
-                Safe, secure transport for races, vacations, or any trip where your bike needs to fly!
-              </Typography>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                <Button
-                  component={Link}
-                  href="/booking"
-                  variant="contained"
-                  size="large"
-                  sx={{
-                    bgcolor: 'white',
-                    color: 'primary.main',
-                    '&:hover': { bgcolor: 'grey.100' }
-                  }}
-                >
-                  Book Now - $30/week
-                </Button>
-                <Button
-                  component={Link}
-                  href="/faq"
-                  variant="outlined"
-                  size="large"
-                  sx={{
-                    borderColor: 'white',
-                    color: 'white',
-                    '&:hover': { borderColor: 'grey.100', bgcolor: 'rgba(255,255,255,0.1)' }
-                  }}
-                >
-                  View Specifications
-                </Button>
-              </Stack>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
-                <Image
-                  src="/Tommy.jpeg"
-                  alt="Bike Box Rental Hamilton"
-                  width={600}
-                  height={450}
-                  style={{ width: '100%', height: 'auto', display: 'block' }}
-                  priority
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
       <Container maxWidth="lg" sx={{ py: 8 }}>
         <Typography variant="h2" component="h2" textAlign="center" gutterBottom>
           B&W International Bike Box II
@@ -138,17 +79,70 @@ export default function HomePage() {
           <Typography variant="h4" component="p" gutterBottom>
             Ready for your next cycling adventure?
           </Typography>
-          <Button
-            component={Link}
-            href="/booking"
-            variant="contained"
-            size="large"
-            sx={{ mt: 2 }}
-          >
-            Check Availability & Book
-          </Button>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} justifyContent="center" sx={{ mt: 2 }}>
+            <Button
+              component={Link}
+              href="/booking"
+              variant="contained"
+              size="large"
+            >
+              Check Availability & Book
+            </Button>
+            <Button
+              component={Link}
+              href="/faq"
+              variant="outlined"
+              size="large"
+            >
+              View Specifications
+            </Button>
+          </Stack>
         </Box>
       </Container>
+
+      <Box sx={{ bgcolor: 'primary.main', color: 'white', py: 8 }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={4} alignItems="center">
+            <Grid item xs={12} md={6}>
+              <Typography variant="h1" component="h1" gutterBottom sx={{ fontSize: { xs: '2.5rem', md: '3rem' } }}>
+                Bike Box Rental Hamilton
+              </Typography>
+              <Typography variant="h5" component="p" sx={{ mb: 4, opacity: 0.95 }}>
+                Professional bike travel case rentals in Hamilton, ON (L8P 2M3)
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
+                Young Tommy Rummel is saving up by renting out a professional B&W bike travel case.
+                Safe, secure transport for races, vacations, or any trip where your bike needs to fly!
+              </Typography>
+              <Button
+                component={Link}
+                href="/booking"
+                variant="contained"
+                size="large"
+                sx={{
+                  bgcolor: 'white',
+                  color: 'primary.main',
+                  '&:hover': { bgcolor: 'grey.100' }
+                }}
+              >
+                Book Now - $30/week
+              </Button>
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
+                <Image
+                  src="/Tommy.jpeg"
+                  alt="Tommy Rummel"
+                  width={600}
+                  height={450}
+                  style={{ width: '100%', height: 'auto', display: 'block' }}
+                  priority
+                />
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
     </>
   );
 }
