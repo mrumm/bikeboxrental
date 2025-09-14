@@ -12,11 +12,7 @@ import {
 } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 
-interface AdminLoginProps {
-  onLogin: () => void;
-}
-
-export default function AdminLogin({ onLogin }: AdminLoginProps) {
+export default function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -34,7 +30,7 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
       });
 
       if (response.ok) {
-        onLogin();
+        window.location.reload();
       } else {
         setError('Invalid password');
       }
