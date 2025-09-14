@@ -39,6 +39,7 @@ export async function createCheckoutSession({
     success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/booking/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/booking`,
     customer_email: customerEmail,
+    receipt_email: customerEmail,
     metadata: {
       startDate,
       endDate,
