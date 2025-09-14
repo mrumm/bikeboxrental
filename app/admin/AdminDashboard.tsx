@@ -59,14 +59,24 @@ export default async function AdminDashboard() {
         <Container maxWidth="xl">
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Typography variant="h5">Admin Dashboard</Typography>
-            <Button
-              href="/api/admin/logout"
-              variant="outlined"
-              size="small"
-              component="a"
-            >
-              Logout
-            </Button>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <Button
+                href="/admin"
+                variant="outlined"
+                size="small"
+                component="a"
+              >
+                Refresh
+              </Button>
+              <Button
+                href="/api/admin/logout"
+                variant="outlined"
+                size="small"
+                component="a"
+              >
+                Logout
+              </Button>
+            </Box>
           </Box>
         </Container>
       </Box>

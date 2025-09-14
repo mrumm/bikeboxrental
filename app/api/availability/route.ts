@@ -3,6 +3,9 @@ import { db, bookings, blockedDates } from '@/lib/db';
 import { eq, and, or, gte, lte } from 'drizzle-orm';
 import { format, parseISO } from 'date-fns';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET() {
   try {
     if (!db) {
