@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db, bookings } from '@/lib/db';
 import { createCheckoutSession } from '@/lib/stripe';
 import { differenceInDays } from 'date-fns';
+import { and, or, lte, gte, eq } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,6 +31,40 @@ export async function POST(request: NextRequest) {
     if (weeks < 1) {
       return NextResponse.json(
         { error: 'Minimum rental period is 1 week' },
+        { status: 400 }
+      );
+    }
+
+    // Check for overlapping bookings
+    const overlappingBookings = await db
+      .select()
+      .from(bookings)
+      .where(
+        and(
+          eq(bookings.paymentStatus, 'completed'),
+          or(
+            // New booking starts during existing booking
+            and(
+              lte(bookings.startDate, startDate),
+              gte(bookings.endDate, startDate)
+            ),
+            // New booking ends during existing booking
+            and(
+              lte(bookings.startDate, endDate),
+              gte(bookings.endDate, endDate)
+            ),
+            // New booking encompasses existing booking
+            and(
+              gte(bookings.startDate, startDate),
+              lte(bookings.endDate, endDate)
+            )
+          )
+        )
+      );
+
+    if (overlappingBookings.length > 0) {
+      return NextResponse.json(
+        { error: 'Selected dates are not available' },
         { status: 400 }
       );
     }
@@ -71,5 +106,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-import { eq } from 'drizzle-orm';

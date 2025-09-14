@@ -75,6 +75,58 @@ export default function BookingPage() {
     return false;
   };
 
+  const isEndDateDisabled = (date: Date) => {
+    if (!startDate) return isDateDisabled(date);
+
+    const dateStr = format(date, 'yyyy-MM-dd');
+    const startStr = format(startDate, 'yyyy-MM-dd');
+
+    // Must be at least 6 days after start date (minimum 1 week)
+    if (isBefore(date, addDays(startDate, 6))) {
+      return true;
+    }
+
+    // Check if there's any booked date between start and this date
+    for (const range of bookedRanges) {
+      // If there's a booking that starts after our start date and before this date
+      // we can't book through it
+      if (range.start > startStr && range.start <= dateStr) {
+        return true;
+      }
+      // If there's a booking that ends after our start date and before this date
+      if (range.end >= startStr && range.end < dateStr) {
+        return true;
+      }
+    }
+
+    return isDateDisabled(date);
+  };
+
+  const isStartDateDisabled = (date: Date) => {
+    if (!endDate) return isDateDisabled(date);
+
+    const dateStr = format(date, 'yyyy-MM-dd');
+    const endStr = format(endDate, 'yyyy-MM-dd');
+
+    // Must be at least 7 days before end date
+    if (isAfter(date, addDays(endDate, -6))) {
+      return true;
+    }
+
+    // Check if there's any booked date between this date and end
+    for (const range of bookedRanges) {
+      // If there's a booking between this start date and our end date
+      if (range.start >= dateStr && range.start <= endStr) {
+        return true;
+      }
+      if (range.end >= dateStr && range.end <= endStr) {
+        return true;
+      }
+    }
+
+    return isDateDisabled(date);
+  };
+
   const calculateWeeks = () => {
     if (!startDate || !endDate) return 0;
     const days = differenceInDays(endDate, startDate) + 1;
@@ -84,6 +136,34 @@ export default function BookingPage() {
   const calculatePrice = () => {
     const weeks = calculateWeeks();
     return weeks * 30;
+  };
+
+  const checkDateRangeAvailable = (start: Date, end: Date): boolean => {
+    const startStr = format(start, 'yyyy-MM-dd');
+    const endStr = format(end, 'yyyy-MM-dd');
+
+    // Check if any booked range overlaps with selected dates
+    for (const range of bookedRanges) {
+      // Check for any overlap between ranges
+      if (
+        (startStr >= range.start && startStr <= range.end) || // Start date is within a booked range
+        (endStr >= range.start && endStr <= range.end) || // End date is within a booked range
+        (startStr <= range.start && endStr >= range.end) // Selected range encompasses a booked range
+      ) {
+        return false;
+      }
+    }
+
+    // Check each day in the selected range
+    let currentDate = new Date(start);
+    while (currentDate <= end) {
+      if (isDateDisabled(currentDate)) {
+        return false;
+      }
+      currentDate = addDays(currentDate, 1);
+    }
+
+    return true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -99,6 +179,12 @@ export default function BookingPage() {
 
     if (calculateWeeks() < 1) {
       setError('Minimum rental period is 1 week');
+      setLoading(false);
+      return;
+    }
+
+    if (!checkDateRangeAvailable(startDate, endDate)) {
+      setError('Selected dates are not available. Please choose a different date range.');
       setLoading(false);
       return;
     }
@@ -164,7 +250,7 @@ export default function BookingPage() {
                   label="Start Date"
                   value={startDate}
                   onChange={setStartDate}
-                  shouldDisableDate={isDateDisabled}
+                  shouldDisableDate={isStartDateDisabled}
                   slotProps={{
                     textField: {
                       fullWidth: true,
@@ -181,8 +267,7 @@ export default function BookingPage() {
                   label="End Date"
                   value={endDate}
                   onChange={setEndDate}
-                  minDate={startDate ? addDays(startDate, 6) : undefined}
-                  shouldDisableDate={isDateDisabled}
+                  shouldDisableDate={isEndDateDisabled}
                   slotProps={{
                     textField: {
                       fullWidth: true,
@@ -193,12 +278,26 @@ export default function BookingPage() {
               </LocalizationProvider>
             </Grid>
 
-            {startDate && endDate && (
+            {(startDate || endDate) && (
               <Grid item xs={12}>
-                <Alert severity="info">
-                  Rental Period: {calculateWeeks()} week{calculateWeeks() !== 1 ? 's' : ''}
-                  {' '}• Total Price: ${calculatePrice()} CAD
-                </Alert>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  {startDate && endDate && (
+                    <Alert severity="info" sx={{ flex: 1 }}>
+                      Rental Period: {calculateWeeks()} week{calculateWeeks() !== 1 ? 's' : ''}
+                      {' '}• Total Price: ${calculatePrice()} CAD
+                    </Alert>
+                  )}
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={() => {
+                      setStartDate(null);
+                      setEndDate(null);
+                    }}
+                  >
+                    Clear Dates
+                  </Button>
+                </Box>
               </Grid>
             )}
 
