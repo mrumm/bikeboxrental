@@ -38,7 +38,12 @@ export default function BookingPage() {
 
   const fetchAvailability = async () => {
     try {
-      const response = await fetch('/api/availability');
+      const response = await fetch('/api/availability', {
+        cache: 'no-store',
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      });
       const data = await response.json();
       setBlockedDates(data.blockedDates || []);
       setBookedRanges(data.bookedRanges || []);
