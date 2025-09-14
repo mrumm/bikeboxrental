@@ -16,11 +16,11 @@ export default function HomePage() {
                 Bike Box Rental Hamilton
               </Typography>
               <Typography variant="h5" component="p" sx={{ mb: 4, opacity: 0.95 }}>
-                Professional bike travel case rentals in Hamilton, ON
+                Professional bike travel case rentals in Hamilton, ON (L8P 2M3)
               </Typography>
               <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-                Professional bike travel case rentals to help cyclists travel safely with their bikes.
-                Perfect for your next cycling adventure, race, or vacation! Family-owned and operated in Hamilton, ON.
+                Young Tommy Rummel is saving up by renting out our family&apos;s professional B&W bike travel case.
+                Safe, secure transport for races, vacations, or any trip where your bike needs to fly!
               </Typography>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <Button

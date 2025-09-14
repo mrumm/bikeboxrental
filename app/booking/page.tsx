@@ -50,14 +50,17 @@ export default function BookingPage() {
   const isDateDisabled = (date: Date) => {
     const dateStr = format(date, 'yyyy-MM-dd');
 
+    // Disable past dates
     if (isBefore(date, startOfDay(new Date()))) {
       return true;
     }
 
+    // Check manually blocked dates
     if (blockedDates.includes(dateStr)) {
       return true;
     }
 
+    // Check booked date ranges
     for (const range of bookedRanges) {
       if (dateStr >= range.start && dateStr <= range.end) {
         return true;
@@ -271,7 +274,7 @@ export default function BookingPage() {
         <Typography variant="body2" color="text.secondary">
           • Minimum rental period is 1 week
           <br />
-          • Pick-up and drop-off location: Hamilton, ON (exact address provided after booking)
+          • Pick-up and drop-off location: Hamilton, ON (L8P 2M3 area - exact address provided after booking)
           <br />
           • Payment is processed securely through Stripe
           <br />

@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     question: 'Where do I pick up and return the box?',
-    answer: 'Pick-up and drop-off are in Hamilton, ON. The exact address will be provided via email 24 hours before your rental starts. We\'re conveniently located and easily accessible.',
+    answer: 'Pick-up and drop-off are in Hamilton, ON (L8P 2M3 area). The exact address will be provided via email 24 hours before your rental starts. We\'re conveniently located and easily accessible.',
   },
   {
     question: 'Will my bike fit?',

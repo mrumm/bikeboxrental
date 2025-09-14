@@ -113,7 +113,7 @@ async function sendConfirmationEmail(booking: any) {
         </ul>
 
         <h3>Pick-up Information:</h3>
-        <p>Location: Hamilton, ON (exact address will be provided via email 24 hours before pick-up)</p>
+        <p>Location: Hamilton, ON (L8P 2M3 area - exact address will be provided via email 24 hours before pick-up)</p>
         <p>Please bring a valid ID for verification.</p>
 
         <p>If you have any questions, please reply to this email.</p>

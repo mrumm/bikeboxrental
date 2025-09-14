@@ -28,7 +28,7 @@ export async function createCheckoutSession({
           product_data: {
             name: 'B&W International Bike Box II Rental',
             description: `Rental from ${startDate} to ${endDate} (${weeks} week${weeks > 1 ? 's' : ''})`,
-            images: [`${process.env.NEXT_PUBLIC_BASE_URL}/bikeboxBW2.jpg`],
+            images: process.env.NEXT_PUBLIC_BASE_URL ? [`${process.env.NEXT_PUBLIC_BASE_URL}/bikeboxBW2.jpg`] : [],
           },
           unit_amount: WEEKLY_PRICE,
         },

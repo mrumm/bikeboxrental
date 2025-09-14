@@ -127,7 +127,7 @@ function BookingSuccessContent() {
         <Typography variant="body2" sx={{ mb: 2 }}>
           1. You&apos;ll receive a confirmation email shortly with all the details
           <br />
-          2. We&apos;ll send you the exact pick-up location 24 hours before your rental starts
+          2. Pick-up location is in Hamilton, ON (L8P 2M3 area) - exact address sent 24 hours before your rental
           <br />
           3. Please bring a valid ID when picking up the bike box
           <br />
