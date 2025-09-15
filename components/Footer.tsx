@@ -46,7 +46,7 @@ export default function Footer() {
 
         <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid', borderColor: 'divider', textAlign: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            © {new Date().getFullYear()} Bike Box Rental Hamilton - A project by Tommy Rummel
+            © {new Date().getFullYear()} Bike Box Rental Hamilton - A project by Tommy R.
           </Typography>
         </Box>
       </Container>

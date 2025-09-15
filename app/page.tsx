@@ -111,7 +111,7 @@ export default function HomePage() {
                 Professional bike travel case rentals in Hamilton, ON (L8P 2M3)
               </Typography>
               <Typography variant="body1" sx={{ mb: 4, lineHeight: 1.7 }}>
-                Young Tommy Rummel is saving up by renting out a professional B&W bike travel case.
+                Young Tommy is saving up by renting out a professional B&W bike travel case.
                 Safe, secure transport for races, vacations, or any trip where your bike needs to fly!
               </Typography>
               <Button
@@ -132,7 +132,7 @@ export default function HomePage() {
               <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                 <Image
                   src="/Tommy.jpeg"
-                  alt="Tommy Rummel"
+                  alt="Tommy"
                   width={600}
                   height={450}
                   style={{ width: '100%', height: 'auto', display: 'block' }}
