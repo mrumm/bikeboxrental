@@ -76,7 +76,7 @@ export default function BookingPage() {
   };
 
   const isEndDateDisabled = (date: Date) => {
-    if (!startDate) return isDateDisabled(date);
+    if (!startDate) return true; // Disable all dates if no start date selected
 
     const dateStr = format(date, 'yyyy-MM-dd');
     const startStr = format(startDate, 'yyyy-MM-dd');
@@ -86,20 +86,31 @@ export default function BookingPage() {
       return true;
     }
 
+    // Check if the date itself is blocked
+    if (blockedDates.includes(dateStr)) {
+      return true;
+    }
+
     // Check if there's any booked date between start and this date
     for (const range of bookedRanges) {
-      // If there's a booking that starts after our start date and before this date
-      // we can't book through it
-      if (range.start > startStr && range.start <= dateStr) {
-        return true;
-      }
-      // If there's a booking that ends after our start date and before this date
-      if (range.end >= startStr && range.end < dateStr) {
+      // Check if any date in the range from start to this date overlaps with a booking
+      const rangeStart = format(startDate, 'yyyy-MM-dd');
+      const rangeEnd = dateStr;
+
+      // If booking overlaps with our intended range
+      if (
+        (range.start <= rangeEnd && range.end >= rangeStart) // Booking overlaps with our range
+      ) {
         return true;
       }
     }
 
-    return isDateDisabled(date);
+    // Don't allow dates too far in the past
+    if (isBefore(date, startOfDay(new Date()))) {
+      return true;
+    }
+
+    return false;
   };
 
   const isStartDateDisabled = (date: Date) => {
@@ -253,7 +264,16 @@ export default function BookingPage() {
                 <DatePicker
                   label="Start Date"
                   value={startDate}
-                  onChange={setStartDate}
+                  onChange={(newDate) => {
+                    setStartDate(newDate);
+                    // Clear end date if it's now invalid
+                    if (endDate && newDate) {
+                      const daysDiff = differenceInDays(endDate, newDate) + 1;
+                      if (daysDiff < 7) {
+                        setEndDate(null);
+                      }
+                    }
+                  }}
                   shouldDisableDate={isStartDateDisabled}
                   slotProps={{
                     textField: {
@@ -272,10 +292,13 @@ export default function BookingPage() {
                   value={endDate}
                   onChange={setEndDate}
                   shouldDisableDate={isEndDateDisabled}
+                  disabled={!startDate}
+                  minDate={startDate ? addDays(startDate, 6) : undefined}
                   slotProps={{
                     textField: {
                       fullWidth: true,
                       required: true,
+                      helperText: startDate && !endDate ? "Select a date at least 7 days from start" : "",
                     },
                   }}
                 />
