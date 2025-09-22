@@ -63,10 +63,10 @@ export default function HomePage() {
                   <AttachMoneyIcon color="primary" fontSize="large" />
                   <Box>
                     <Typography variant="h6" gutterBottom>
-                      Simple Weekly Pricing
+                      Flexible Daily Pricing
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      Just $30 per week. Book online, pay securely with Stripe, and pick up in Hamilton
+                      7-day minimum at $30, then $4.29/day. Book online, pay securely with Stripe, and pick up in Hamilton
                     </Typography>
                   </Box>
                 </Stack>
@@ -125,7 +125,7 @@ export default function HomePage() {
                   '&:hover': { bgcolor: 'grey.100' }
                 }}
               >
-                Book Now - $30/week
+                Book Now - From $30
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>

@@ -26,11 +26,10 @@ export async function POST(request: NextRequest) {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const days = differenceInDays(end, start) + 1;
-    const weeks = Math.ceil(days / 7);
 
-    if (weeks < 1) {
+    if (days < 7) {
       return NextResponse.json(
-        { error: 'Minimum rental period is 1 week' },
+        { error: 'Minimum rental period is 7 days' },
         { status: 400 }
       );
     }
@@ -69,7 +68,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const totalPrice = weeks * 30 * 100;
+    // Calculate price: $30 for first 7 days, then $30/7 per additional day
+    let totalPrice: number;
+    if (days <= 7) {
+      totalPrice = 30 * 100; // $30 in cents
+    } else {
+      const additionalDays = days - 7;
+      const dailyRate = 30 / 7;
+      totalPrice = Math.round((30 + (additionalDays * dailyRate)) * 100); // Convert to cents
+    }
 
     const [newBooking] = await db
       .insert(bookings)
@@ -89,7 +96,8 @@ export async function POST(request: NextRequest) {
       customerEmail,
       startDate,
       endDate,
-      weeks,
+      days,
+      totalPrice,
     });
 
     await db

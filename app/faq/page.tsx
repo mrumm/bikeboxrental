@@ -30,7 +30,7 @@ const specifications = [
 const faqs = [
   {
     question: 'How do I book the bike box?',
-    answer: 'Simply click on "Book Now" from our homepage, select your rental dates (minimum 1 week), fill in your contact information, and complete the payment through our secure Stripe checkout. You\'ll receive an instant confirmation email.',
+    answer: 'Simply click on "Book Now" from our homepage, select your rental dates (minimum 7 days), fill in your contact information, and complete the payment through our secure Stripe checkout. You\'ll receive an instant confirmation email.',
   },
   {
     question: 'What\'s included with the rental?',
@@ -58,7 +58,7 @@ const faqs = [
   },
   {
     question: 'Can I extend my rental?',
-    answer: 'Yes, subject to availability. Contact us before your rental ends to arrange an extension. Additional weeks are charged at the same $30/week rate.',
+    answer: 'Yes, subject to availability. Contact us before your rental ends to arrange an extension. Additional days are charged at $4.29/day after your initial booking period.',
   },
   {
     question: 'Is there a damage deposit?',
@@ -107,14 +107,14 @@ export default function FAQPage() {
                 Rental Rate
               </Typography>
               <Typography variant="h6" gutterBottom>
-                $30 CAD per week
+                $30 CAD (7 days), then $4.29/day
               </Typography>
 
               <Typography variant="subtitle2" color="text.secondary" sx={{ mt: 2 }}>
                 Minimum Rental
               </Typography>
               <Typography variant="h6" gutterBottom>
-                1 week
+                7 days
               </Typography>
 
               <Typography variant="subtitle2" color="text.secondary" sx={{ mt: 2 }}>

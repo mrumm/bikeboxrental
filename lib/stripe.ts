@@ -7,17 +7,20 @@ export const stripe = process.env.STRIPE_SECRET_KEY
   : null as any;
 
 export const WEEKLY_PRICE = 3000; // $30.00 in cents
+export const DAILY_PRICE = Math.round(3000 / 7); // $30/7 ≈ $4.29 in cents
 
 export async function createCheckoutSession({
   customerEmail,
   startDate,
   endDate,
-  weeks,
+  days,
+  totalPrice,
 }: {
   customerEmail: string;
   startDate: string;
   endDate: string;
-  weeks: number;
+  days: number;
+  totalPrice: number;
 }) {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
@@ -27,12 +30,12 @@ export async function createCheckoutSession({
           currency: 'cad',
           product_data: {
             name: 'B&W International Bike Box II Rental',
-            description: `Rental from ${startDate} to ${endDate} (${weeks} week${weeks > 1 ? 's' : ''})`,
+            description: `Rental from ${startDate} to ${endDate} (${days} day${days > 1 ? 's' : ''})`,
             images: process.env.NEXT_PUBLIC_BASE_URL ? [`${process.env.NEXT_PUBLIC_BASE_URL}/bikeboxBW2.jpg`] : [],
           },
-          unit_amount: WEEKLY_PRICE,
+          unit_amount: totalPrice,
         },
-        quantity: weeks,
+        quantity: 1,
       },
     ],
     mode: 'payment',
@@ -42,7 +45,8 @@ export async function createCheckoutSession({
     metadata: {
       startDate,
       endDate,
-      weeks: weeks.toString(),
+      days: days.toString(),
+      totalPrice: totalPrice.toString(),
     },
   });
 

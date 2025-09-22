@@ -81,7 +81,7 @@ export default function BookingPage() {
     const dateStr = format(date, 'yyyy-MM-dd');
     const startStr = format(startDate, 'yyyy-MM-dd');
 
-    // Must be at least 6 days after start date (minimum 1 week)
+    // Must be at least 6 days after start date (minimum 7 days total)
     if (isBefore(date, addDays(startDate, 6))) {
       return true;
     }
@@ -108,7 +108,7 @@ export default function BookingPage() {
     const dateStr = format(date, 'yyyy-MM-dd');
     const endStr = format(endDate, 'yyyy-MM-dd');
 
-    // Must be at least 7 days before end date
+    // Must be at least 6 days before end date (minimum 7 days total)
     if (isAfter(date, addDays(endDate, -6))) {
       return true;
     }
@@ -127,15 +127,19 @@ export default function BookingPage() {
     return isDateDisabled(date);
   };
 
-  const calculateWeeks = () => {
+  const calculateDays = () => {
     if (!startDate || !endDate) return 0;
-    const days = differenceInDays(endDate, startDate) + 1;
-    return Math.ceil(days / 7);
+    return differenceInDays(endDate, startDate) + 1;
   };
 
   const calculatePrice = () => {
-    const weeks = calculateWeeks();
-    return weeks * 30;
+    const days = calculateDays();
+    if (days === 0) return 0;
+    // First week (7 days) is $30, then $30/7 per additional day
+    if (days <= 7) return 30;
+    const additionalDays = days - 7;
+    const dailyRate = 30 / 7;
+    return Math.round((30 + (additionalDays * dailyRate)) * 100) / 100;
   };
 
   const checkDateRangeAvailable = (start: Date, end: Date): boolean => {
@@ -177,8 +181,8 @@ export default function BookingPage() {
       return;
     }
 
-    if (calculateWeeks() < 1) {
-      setError('Minimum rental period is 1 week');
+    if (calculateDays() < 7) {
+      setError('Minimum rental period is 7 days');
       setLoading(false);
       return;
     }
@@ -232,7 +236,7 @@ export default function BookingPage() {
         Book Your Bike Box
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-        Select your rental dates and complete the booking. Weekly pricing at $30/week.
+        Select your rental dates and complete the booking. Minimum 7 days at $30, then ${(30/7).toFixed(2)}/day.
       </Typography>
 
       <Paper sx={{ p: 4 }}>
@@ -283,8 +287,8 @@ export default function BookingPage() {
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                   {startDate && endDate && (
                     <Alert severity="info" sx={{ flex: 1 }}>
-                      Rental Period: {calculateWeeks()} week{calculateWeeks() !== 1 ? 's' : ''}
-                      {' '}• Total Price: ${calculatePrice()} CAD
+                      Rental Period: {calculateDays()} day{calculateDays() !== 1 ? 's' : ''}
+                      {' '}• Total Price: ${calculatePrice().toFixed(2)} CAD
                     </Alert>
                   )}
                   <Button
@@ -364,7 +368,7 @@ export default function BookingPage() {
                 fullWidth
                 disabled={loading || !startDate || !endDate || !customerName || !customerEmail}
               >
-                {loading ? <CircularProgress size={24} /> : `Proceed to Payment - $${calculatePrice()}`}
+                {loading ? <CircularProgress size={24} /> : `Proceed to Payment - $${calculatePrice().toFixed(2)}`}
               </Button>
             </Grid>
           </Grid>
@@ -376,7 +380,7 @@ export default function BookingPage() {
           Booking Information
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          • Minimum rental period is 1 week
+          • Minimum rental period is 7 days ($30 for first week, then ${(30/7).toFixed(2)}/day)
           <br />
           • Pick-up and drop-off location: Hamilton, ON (L8P 2M3 area - exact address provided after booking)
           <br />
