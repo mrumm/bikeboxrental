@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import {
   Container,
   Typography,
@@ -15,6 +16,21 @@ import {
   TableRow,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
+export const metadata: Metadata = {
+  title: 'FAQ & Specifications | Bike Box Rental Hamilton - B&W International Bike Box II',
+  description: 'Frequently asked questions about bike box rentals in Hamilton, ON. Technical specs, packing instructions, pricing details, and everything you need to know about the B&W International Bike Box II.',
+  keywords: 'bike box FAQ, B&W bike box specifications, bike travel case dimensions, how to pack bike for flight, bike box rental questions Hamilton',
+  openGraph: {
+    title: 'FAQ & Specifications - Bike Box Rental Hamilton',
+    description: 'Get answers to common questions about renting a professional bike travel case. Includes technical specifications and packing tips.',
+    url: '/faq',
+  },
+  twitter: {
+    title: 'FAQ & Specifications - Bike Box Rental Hamilton',
+    description: 'Get answers to common questions about renting a professional bike travel case. Includes technical specifications and packing tips.',
+  },
+};
 
 const specifications = [
   { label: 'External Dimensions', metric: '119 × 89 × 29.5 cm', imperial: '46.9 × 35 × 11.6 in' },
@@ -71,14 +87,33 @@ const faqs = [
 ];
 
 export default function FAQPage() {
+  // Structured data for FAQPage
+  const faqStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  };
+
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Typography variant="h2" component="h1" gutterBottom>
-        Frequently Asked Questions
-      </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
-        Everything you need to know about Bike Box Rental Hamilton
-      </Typography>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        <Typography variant="h2" component="h1" gutterBottom>
+          Frequently Asked Questions
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
+          Everything you need to know about Bike Box Rental Hamilton
+        </Typography>
 
       <Grid container spacing={4}>
         <Grid item xs={12} lg={8}>
@@ -169,6 +204,7 @@ export default function FAQPage() {
           Feel free to reach out to us at rummel.markus@gmail.com
         </Typography>
       </Paper>
-    </Container>
+      </Container>
+    </>
   );
 }
