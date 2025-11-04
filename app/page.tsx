@@ -21,7 +21,7 @@ export default function HomePage() {
             <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
               <Image
                 src="/bikeboxBW2.jpg"
-                alt="B&W International Bike Box II"
+                alt="B&W International Bike Box II - Professional hard shell bike travel case for rent in Hamilton, Ontario"
                 width={600}
                 height={400}
                 style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -132,7 +132,7 @@ export default function HomePage() {
               <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden' }}>
                 <Image
                   src="/Tommy.jpeg"
-                  alt="Tommy"
+                  alt="Young cyclist Tommy offering bike box rental service in Hamilton, Ontario"
                   width={600}
                   height={450}
                   style={{ width: '100%', height: 'auto', display: 'block' }}

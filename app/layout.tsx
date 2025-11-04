@@ -58,12 +58,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://bikeboxrentalhamilton.com';
+
+  const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Bike Box Rental Hamilton',
     description: 'Professional bike travel case rentals in Hamilton, Ontario. B&W International Bike Box II available for weekly rentals at $30/week.',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://bikeboxrentalhamilton.com',
+    url: baseUrl,
     telephone: '',
     email: 'rummel.markus@gmail.com',
     address: {
@@ -85,7 +87,7 @@ export default function RootLayout({
       closes: '23:59',
     },
     priceRange: '$30/week',
-    image: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://bikeboxrentalhamilton.com'}/bikeboxBW2.jpg`,
+    image: `${baseUrl}/bikeboxBW2.jpg`,
     offers: {
       '@type': 'Offer',
       name: 'B&W International Bike Box II Rental',
@@ -97,12 +99,64 @@ export default function RootLayout({
     },
   };
 
+  const productSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'B&W International Bike Box II',
+    description: 'Professional-grade hard shell bike travel case for air travel. Accommodates road bikes up to 62cm frame size. Features ABS plastic shell, aluminum frame, 4 wheels, and secure latches.',
+    image: `${baseUrl}/bikeboxBW2.jpg`,
+    brand: {
+      '@type': 'Brand',
+      name: 'B&W International',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: `${baseUrl}/booking`,
+      priceCurrency: 'CAD',
+      price: '30.00',
+      priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString(),
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/UsedCondition',
+      seller: {
+        '@type': 'LocalBusiness',
+        name: 'Bike Box Rental Hamilton',
+      },
+      description: '7-day minimum rental at $30, then $4.29/day',
+    },
+    category: 'Bicycle Travel Case',
+    material: 'ABS Plastic, Aluminum',
+    weight: {
+      '@type': 'QuantitativeValue',
+      value: '13',
+      unitCode: 'KGM',
+    },
+    depth: {
+      '@type': 'QuantitativeValue',
+      value: '29.5',
+      unitCode: 'CMT',
+    },
+    width: {
+      '@type': 'QuantitativeValue',
+      value: '89',
+      unitCode: 'CMT',
+    },
+    height: {
+      '@type': 'QuantitativeValue',
+      value: '119',
+      unitCode: 'CMT',
+    },
+  };
+
   return (
     <html lang="en">
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
         />
       </head>
       <body className={inter.className}>
