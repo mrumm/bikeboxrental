@@ -104,9 +104,18 @@ export default function HomePage() {
         <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
-              <Typography variant="h1" component="h1" gutterBottom sx={{ fontSize: { xs: '2.5rem', md: '3rem' } }}>
-                Bike Box Rental Hamilton
-              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
+                <Image
+                  src="/cyclist-icon.svg"
+                  alt="Cyclist icon"
+                  width={60}
+                  height={60}
+                  style={{ flexShrink: 0 }}
+                />
+                <Typography variant="h1" component="h1" sx={{ fontSize: { xs: '2.5rem', md: '3rem' }, lineHeight: 1.2 }}>
+                  Bike Box Rental Hamilton
+                </Typography>
+              </Box>
               <Typography variant="h5" component="p" sx={{ mb: 4, opacity: 0.95 }}>
                 Professional bike travel case rentals in Hamilton, ON (L8P 2M3)
               </Typography>
