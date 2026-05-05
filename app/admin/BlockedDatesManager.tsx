@@ -26,6 +26,46 @@ type BlockedDate = {
   createdAt: string;
 };
 
+type BlockedRange = {
+  ids: number[];
+  startDate: string;
+  endDate: string;
+  reason: string | null;
+  createdAt: string;
+};
+
+function addDayString(date: string): string {
+  const [y, m, d] = date.split('-').map(Number);
+  const next = new Date(Date.UTC(y, m - 1, d + 1));
+  return next.toISOString().slice(0, 10);
+}
+
+function groupConsecutive(rows: BlockedDate[]): BlockedRange[] {
+  const sorted = [...rows].sort((a, b) => a.date.localeCompare(b.date));
+  const groups: BlockedRange[] = [];
+  for (const row of sorted) {
+    const last = groups[groups.length - 1];
+    if (
+      last &&
+      addDayString(last.endDate) === row.date &&
+      last.reason === row.reason &&
+      last.createdAt === row.createdAt
+    ) {
+      last.endDate = row.date;
+      last.ids.push(row.id);
+    } else {
+      groups.push({
+        ids: [row.id],
+        startDate: row.date,
+        endDate: row.date,
+        reason: row.reason,
+        createdAt: row.createdAt,
+      });
+    }
+  }
+  return groups;
+}
+
 export default function BlockedDatesManager() {
   const [rows, setRows] = useState<BlockedDate[]>([]);
   const [loading, setLoading] = useState(true);
@@ -90,12 +130,16 @@ export default function BlockedDatesManager() {
     }
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (ids: number[]) => {
     setError('');
     setSuccess('');
     try {
-      const res = await fetch(`/api/admin/blocked-dates/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Failed');
+      const results = await Promise.all(
+        ids.map((id) =>
+          fetch(`/api/admin/blocked-dates/${id}`, { method: 'DELETE' })
+        )
+      );
+      if (results.some((r) => !r.ok)) throw new Error('Failed');
       await load();
     } catch (e) {
       setError('Failed to remove blocked date');
@@ -167,23 +211,29 @@ export default function BlockedDatesManager() {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell>Date</TableCell>
+                <TableCell>Dates</TableCell>
+                <TableCell>Days</TableCell>
                 <TableCell>Reason</TableCell>
                 <TableCell>Added</TableCell>
                 <TableCell align="right">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.reason || '-'}</TableCell>
-                  <TableCell>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
+              {groupConsecutive(rows).map((group) => (
+                <TableRow key={group.ids.join('-')}>
+                  <TableCell>
+                    {group.startDate === group.endDate
+                      ? group.startDate
+                      : `${group.startDate} → ${group.endDate}`}
+                  </TableCell>
+                  <TableCell>{group.ids.length}</TableCell>
+                  <TableCell>{group.reason || '-'}</TableCell>
+                  <TableCell>{new Date(group.createdAt).toLocaleDateString()}</TableCell>
                   <TableCell align="right">
                     <IconButton
                       aria-label="remove"
                       size="small"
-                      onClick={() => handleDelete(row.id)}
+                      onClick={() => handleDelete(group.ids)}
                     >
                       <DeleteIcon fontSize="small" />
                     </IconButton>
