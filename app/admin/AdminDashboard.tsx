@@ -15,6 +15,7 @@ import {
   Alert,
   Button,
 } from '@mui/material';
+import BlockedDatesManager from './BlockedDatesManager';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -89,6 +90,8 @@ export default async function AdminDashboard() {
         <Alert severity="info" sx={{ mb: 3 }}>
           This is a simplified admin view. For full payment details and management, use your Stripe Dashboard.
         </Alert>
+
+        <BlockedDatesManager />
 
         <TableContainer component={Paper}>
           <Table>
