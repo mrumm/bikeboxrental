@@ -96,29 +96,33 @@ async function sendConfirmationEmail(booking: any) {
   const { Resend } = await import('resend');
   const resend = new Resend(process.env.RESEND_API_KEY);
 
+  const firstName = booking.customerName.split(' ')[0];
+
   try {
     await resend.emails.send({
-      from: 'Bike Box Rental Hamilton <noreply@bikeboxrentalhamilton.com>',
+      from: 'Markus <noreply@bikeboxrentalhamilton.com>',
+      reply_to: 'rummel.markus@gmail.com',
       to: booking.customerEmail,
+      cc: 'rummel.markus@gmail.com',
       subject: 'Booking Confirmation - Bike Box Rental Hamilton',
       html: `
-        <h2>Booking Confirmed!</h2>
-        <p>Dear ${booking.customerName},</p>
-        <p>Thank you for booking with Bike Box Rental Hamilton! Your rental has been confirmed.</p>
+        <p>Hi ${firstName},</p>
+
+        <p>Thank you for booking a bike box rental!</p>
 
         <h3>Booking Details:</h3>
         <ul>
           <li><strong>Rental Period:</strong> ${booking.startDate} to ${booking.endDate}</li>
-          <li><strong>Total Amount Paid:</strong> $${(booking.totalPrice / 100).toFixed(2)} CAD</li>
+          <li><strong>Total Paid:</strong> $${(booking.totalPrice / 100).toFixed(2)} CAD</li>
         </ul>
 
-        <h3>Pick-up Information:</h3>
-        <p>Location: Hamilton, ON (L8P 2M3 area - exact address will be provided via email 24 hours before pick-up)</p>
-        <p>Please bring a valid ID for verification.</p>
+        <p>For pick up you can come by before 8:30 AM or after 5 PM on weekdays, or we can find a time on the weekend. I recommend picking up the day before your rental begins.</p>
 
-        <p>If you have any questions, please reply to this email.</p>
+        <p>The address is 65 Homewood Ave, Hamilton, ON L8P 2M3.</p>
 
-        <p>Best regards,<br>Bike Box Rental Hamilton</p>
+        <p><strong>Let me know what time works for you please by replying to this email.</strong></p>
+
+        <p>Best wishes,<br>Markus<br>365 888 2803</p>
       `,
     });
   } catch (error) {
