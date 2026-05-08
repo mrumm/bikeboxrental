@@ -8,8 +8,8 @@ import { Box } from '@mui/material';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Bike Box Rental Hamilton - Professional Bike Travel Case Rentals | $30/week",
-  description: 'Rent a professional B&W International Bike Box II in Hamilton, Ontario. Secure bike transport for races & vacations. Weekly rentals at $30. Located in L8P 2M3 area. Book online today!',
+  title: "Bike Box Rental Hamilton - Professional Bike Travel Case Rentals | $50/week",
+  description: 'Rent a professional B&W International Bike Box II in Hamilton, Ontario. Secure bike transport for races & vacations. Weekly rentals at $50. Located in L8P 2M3 area. Book online today!',
   keywords: 'bike box rental hamilton, bike travel case rental, bicycle transport hamilton, bike shipping box, B&W bike box, cycling equipment rental hamilton ontario',
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://bikeboxrentalhamilton.com'),
   alternates: {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Bike Box Rental Hamilton - Professional Bike Travel Cases',
-    description: 'Rent a B&W International Bike Box II in Hamilton for $30/week. Perfect for races, vacations, and bike transport. Located in L8P 2M3.',
+    description: 'Rent a B&W International Bike Box II in Hamilton for $50/week. Perfect for races, vacations, and bike transport. Located in L8P 2M3.',
     url: process.env.NEXT_PUBLIC_BASE_URL || 'https://bikeboxrentalhamilton.com',
     siteName: 'Bike Box Rental Hamilton',
     images: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bike Box Rental Hamilton - $30/week',
+    title: 'Bike Box Rental Hamilton - $50/week',
     description: 'Professional bike travel case rentals in Hamilton, ON. B&W International Bike Box II. Book online for your next cycling adventure!',
     images: ['/bikeboxBW2.jpg'],
   },
@@ -64,7 +64,7 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Bike Box Rental Hamilton',
-    description: 'Professional bike travel case rentals in Hamilton, Ontario. B&W International Bike Box II available for weekly rentals at $30/week.',
+    description: 'Professional bike travel case rentals in Hamilton, Ontario. B&W International Bike Box II available for weekly rentals at $50/week.',
     url: baseUrl,
     telephone: '',
     email: 'rummel.markus@gmail.com',
@@ -86,13 +86,13 @@ export default function RootLayout({
       opens: '00:00',
       closes: '23:59',
     },
-    priceRange: '$30/week',
+    priceRange: '$50/week',
     image: `${baseUrl}/bikeboxBW2.jpg`,
     offers: {
       '@type': 'Offer',
       name: 'B&W International Bike Box II Rental',
       description: 'Weekly rental of professional bike travel case',
-      price: '30.00',
+      price: '50.00',
       priceCurrency: 'CAD',
       availability: 'https://schema.org/InStock',
       validFrom: new Date().toISOString(),
@@ -113,7 +113,7 @@ export default function RootLayout({
       '@type': 'Offer',
       url: `${baseUrl}/booking`,
       priceCurrency: 'CAD',
-      price: '30.00',
+      price: '50.00',
       priceValidUntil: new Date(new Date().setFullYear(new Date().getFullYear() + 1)).toISOString(),
       availability: 'https://schema.org/InStock',
       itemCondition: 'https://schema.org/UsedCondition',
@@ -121,7 +121,7 @@ export default function RootLayout({
         '@type': 'LocalBusiness',
         name: 'Bike Box Rental Hamilton',
       },
-      description: '7-day minimum rental at $30, then $4.29/day',
+      description: '7-day minimum rental at $50, then $5/day',
     },
     category: 'Bicycle Travel Case',
     material: 'ABS Plastic, Aluminum',

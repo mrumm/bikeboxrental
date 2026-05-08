@@ -68,14 +68,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Calculate price: $30 for first 7 days, then $30/7 per additional day
+    // Calculate price: $50 for first 7 days, then $5 per additional day
     let totalPrice: number;
     if (days <= 7) {
-      totalPrice = 30 * 100; // $30 in cents
+      totalPrice = 50 * 100; // $50 in cents
     } else {
       const additionalDays = days - 7;
-      const dailyRate = 30 / 7;
-      totalPrice = Math.round((30 + (additionalDays * dailyRate)) * 100); // Convert to cents
+      totalPrice = (50 + additionalDays * 5) * 100; // Convert to cents
     }
 
     const [newBooking] = await db

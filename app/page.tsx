@@ -66,7 +66,7 @@ export default function HomePage() {
                       Flexible Daily Pricing
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                      7-day minimum at $30, then $4.29/day. Book online, pay securely with Stripe, and pick up in Hamilton
+                      7-day minimum at $50, then $5/day. Book online, pay securely with Stripe, and pick up in Hamilton
                     </Typography>
                   </Box>
                 </Stack>
@@ -125,7 +125,7 @@ export default function HomePage() {
                   '&:hover': { bgcolor: 'grey.100' }
                 }}
               >
-                Book Now - From $30
+                Book Now - From $50
               </Button>
             </Grid>
             <Grid item xs={12} md={6}>

@@ -142,7 +142,7 @@ export default function FAQPage() {
                 Rental Rate
               </Typography>
               <Typography variant="h6" gutterBottom>
-                $30 CAD (7 days), then $4.29/day
+                $50 CAD (7 days), then $5/day
               </Typography>
 
               <Typography variant="subtitle2" color="text.secondary" sx={{ mt: 2 }}>

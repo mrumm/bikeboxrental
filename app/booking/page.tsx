@@ -146,11 +146,10 @@ export default function BookingPage() {
   const calculatePrice = () => {
     const days = calculateDays();
     if (days === 0) return 0;
-    // First week (7 days) is $30, then $30/7 per additional day
-    if (days <= 7) return 30;
+    // First week (7 days) is $50, then $5 per additional day
+    if (days <= 7) return 50;
     const additionalDays = days - 7;
-    const dailyRate = 30 / 7;
-    return Math.round((30 + (additionalDays * dailyRate)) * 100) / 100;
+    return 50 + additionalDays * 5;
   };
 
   const checkDateRangeAvailable = (start: Date, end: Date): boolean => {
@@ -247,7 +246,7 @@ export default function BookingPage() {
         Book Your Bike Box
       </Typography>
       <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-        Select your rental dates and complete the booking. Minimum 7 days at $30, then ${(30/7).toFixed(2)}/day.
+        Select your rental dates and complete the booking. Minimum 7 days at $50, then $5.00/day.
       </Typography>
 
       <Paper sx={{ p: 4 }}>
@@ -403,7 +402,7 @@ export default function BookingPage() {
           Booking Information
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          • Minimum rental period is 7 days ($30 for first week, then ${(30/7).toFixed(2)}/day)
+          • Minimum rental period is 7 days ($50 for first week, then $5.00/day)
           <br />
           • Pick-up and drop-off location: Hamilton, ON (L8P 2M3 area - exact address provided after booking)
           <br />

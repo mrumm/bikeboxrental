@@ -6,8 +6,8 @@ export const stripe = process.env.STRIPE_SECRET_KEY
     })
   : null as any;
 
-export const WEEKLY_PRICE = 3000; // $30.00 in cents
-export const DAILY_PRICE = Math.round(3000 / 7); // $30/7 ≈ $4.29 in cents
+export const WEEKLY_PRICE = 5000; // $50.00 in cents
+export const DAILY_PRICE = 500; // $5.00 in cents
 
 export async function createCheckoutSession({
   customerEmail,
